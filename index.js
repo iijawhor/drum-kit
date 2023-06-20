@@ -4,11 +4,13 @@ for (let i = 0; i < buttons; i++) {
   document.querySelectorAll(".drum")[i].addEventListener("click", function () {
     let buttonInnerHTML = this.innerHTML;
     makeSound(buttonInnerHTML);
+    buttonAnimation(buttonInnerHTML);
   });
 }
 // detecting keyboard press
 document.addEventListener("keypress", function (event) {
   makeSound(event.key);
+  buttonAnimation(event.key);
 });
 
 const makeSound = (key) => {
@@ -45,4 +47,12 @@ const makeSound = (key) => {
     default:
       break;
   }
+};
+
+const buttonAnimation = (pressedKey) => {
+  let activeButton = document.querySelector("." + pressedKey);
+  activeButton.classList.add("pressed");
+  setTimeout(() => {
+    activeButton.classList.remove("pressed");
+  }, 100);
 };
